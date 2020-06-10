@@ -1,0 +1,43 @@
+<form [formGroup]="formWorker" (ngSubmit) = "onAddWorker()" class="row mb-3">
+  
+    <div class="col-12">
+      <h5>Добавить сотрудника</h5>
+    </div>
+
+    <div class="col-3">
+      <input type="text" class="form-control" placeholder="Имя" formControlName="name"/>
+      <div class="errorName" *ngIf="(formWorker.get('name').touched && formWorker.get('name').invalid)">
+        <span class="badge badge-danger">Заполните поле</span>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <input type="text" class="form-control" placeholder="Фамилия" formControlName="surname"/>
+      <div class="errorSurname"
+        *ngIf="(formWorker.get('surname').touched && formWorker.get('surname').invalid)">
+        <span class="badge badge-danger">Заполните поле</span>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <input [textMask]="{mask: mask}" type="text" class="form-control" placeholder="Телефон" formControlName="phoneNumber"/>
+      <div class="errorNumer"
+        *ngIf="((formWorker.get('phoneNumber').touched) && (formWorker.get('phoneNumber').invalid))">
+        <span class="badge badge-danger">Неверный формат</span>
+      </div>
+    </div>
+
+    <div class="col-3">
+      <select class="custom-select" formControlName="type" [(ngModel)]="type">
+        <option [ngValue]="myWorkerType.programmer">Программист</option>
+        <option [ngValue]="myWorkerType.designer">Дизайнер</option>
+        <option [ngValue]="myWorkerType.copywriter">Рекламщик</option>
+        <option [ngValue]="myWorkerType.manager">Менеджер</option>
+      </select>
+    </div>
+
+    <div class="col-12 mt-1">
+      <button class="btn btn-outline-primary btn-sm" [disabled]="formWorker.invalid">Добавить</button>
+    </div>
+
+</form>
